@@ -10,7 +10,7 @@ class ListBooks extends Component {
   render() {
    
    const {bookshelves, myBookList} = this.props; 
-   
+      
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -27,7 +27,7 @@ class ListBooks extends Component {
                      myBookList = {myBookList}/>
                 ))
              }
-            console.log(myBookList);
+            
             <div className="open-search">
               <button>Add a book</button>
             </div>

@@ -8,9 +8,8 @@ import './App.css';
 
 class App extends Component{
 
-   constructor(){
-      super();
-      this.state = { myBookList: [] };
+   state = {
+      myBookList:[]
    }
 
    bookshelves = [
@@ -20,7 +19,7 @@ class App extends Component{
    ];
 
    componentDidMount(){
-      BooksAPI.getAll().then(myBookList => {
+         BooksAPI.getAll().then(myBookList => {
          this.setState(() => ({myBookList})
          )
       })
@@ -34,7 +33,6 @@ class App extends Component{
       return(
          
          <div className="app">
-            {console.log(this.bookshelves, myBookList)}
             <ListBooks 
             bookshelves={this.bookshelves}
             myBookList={myBookList}/>

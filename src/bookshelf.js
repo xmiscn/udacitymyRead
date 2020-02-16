@@ -5,13 +5,29 @@ import "./App.css";
 //import {Route} from 'react-router-dom';
 
 class BookShelf extends Component {
+
+  state = {
+    filteredBooks: [],
+  }
+  
+
   render() {
 
-    const { shelf, myBookList } = this.props;
-    console.log(myBookList, shelf);
+    const { shelf } = this.props;
+    const {myBookList} = this.state;
 
-//    const filteredBooks = myBookList.filter(myBookList.shelf === shelf.key);
-//   console.log(filteredBooks);
+    if(myBookList) {
+      console.log("Inside the filter")
+      this.setState((currentState) => ({
+        filteredBooks: myBookList.filter((c) => 
+        {
+          return c.shelf === shelf.key
+        })  
+      })) 
+      console.log("Filtered Books",this.state.filteredBooks);
+    }
+    
+   
 
     return (
       <div className="bookshelf">
