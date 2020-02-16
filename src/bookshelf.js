@@ -21,7 +21,7 @@ class BookShelf extends Component {
             <li>
               {
                 myBookList.map( book => (
-                <Book book = {book} shelf = {shelf}/>
+                <Book key={book.key} book = {book} shelf = {shelf}/>
                 ))
               }
             </li>

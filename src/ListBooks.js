@@ -19,13 +19,14 @@ class ListBooks extends Component {
         <div className="list-books-content">
           <div>
              {
-                bookshelves.map( shelf => (
-                   
+                bookshelves.map( shelf => {
+                  let filteredBooksByShelf = myBookList.filter(book => book.shelf === shelf.key);
+                  return(               
                   <BookShelf 
                      key = {shelf.key}
                      shelf = {shelf}
-                     myBookList = {myBookList}/>
-                ))
+                     myBookList = {filteredBooksByShelf}/>);
+                })
              }
             
             <div className="open-search">
