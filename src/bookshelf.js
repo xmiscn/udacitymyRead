@@ -6,39 +6,24 @@ import "./App.css";
 
 class BookShelf extends Component {
 
-  state = {
-    filteredBooks: [],
-  }
-  
 
+
+  
   render() {
 
-    const { shelf } = this.props;
-    const {myBookList} = this.state;
-
-    if(myBookList) {
-      console.log("Inside the filter")
-      this.setState((currentState) => ({
-        filteredBooks: myBookList.filter((c) => 
-        {
-          return c.shelf === shelf.key
-        })  
-      })) 
-      console.log("Filtered Books",this.state.filteredBooks);
-    }
-    
+    const { shelf, myBookList } = this.props;
    
-
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">{shelf.name}</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
             <li>
-              <Book />
-            </li>
-            <li>
-               <Book />
+              {
+                myBookList.map( book => (
+                <Book book = {book} shelf = {shelf}/>
+                ))
+              }
             </li>
           </ol>
         </div>

@@ -23,7 +23,6 @@ class App extends Component{
          this.setState(() => ({myBookList})
          )
       })
-    
    }
 
    render(){

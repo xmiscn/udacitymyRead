@@ -3,9 +3,14 @@ import  './App.css';
 
 
 class Book extends Component{
+
+  
+
    render(){
+      const {book, shelf} = this.props;
+      console.log(shelf, book)
       return(
-         <h3>Book1</h3>
+         <h3>Title: {book.title} - Shelf: {book.shelf}</h3>
       );
    }
 }
