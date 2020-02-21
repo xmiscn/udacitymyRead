@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Book from './book.js'
+import Book from './Book.js'
 import "./App.css";
 
 //import {Route} from 'react-router-dom';
@@ -18,13 +18,13 @@ class BookShelf extends Component {
         <h2 className="bookshelf-title">{shelf.name}</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
-            <li>
+            
               {
                 myBookList.map( book => (
                 <Book key={book.key} book = {book} shelf = {shelf}/>
                 ))
               }
-            </li>
+            
           </ol>
         </div>
       </div>

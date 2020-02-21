@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import BookShelf from "./bookshelf";
+import BookShelf from "./Bookshelf";
 
 //import {Route} from 'react-router-dom';
 
@@ -17,7 +17,7 @@ class ListBooks extends Component {
           <h1>MyReads</h1>
         </div>
         <div className="list-books-content">
-          <div>
+          
              {
                 bookshelves.map( shelf => {
                   let filteredBooksByShelf = myBookList.filter(book => book.shelf === shelf.key);
@@ -32,7 +32,7 @@ class ListBooks extends Component {
             <div className="open-search">
               <button>Add a book</button>
             </div>
-          </div>
+        
         </div>
       </div>
     );
