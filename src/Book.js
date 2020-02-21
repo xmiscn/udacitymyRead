@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import BookShelfChanger from "./BookShelfChanger"
 import "./App.css";
 
 class Book extends Component {
@@ -16,7 +17,7 @@ class Book extends Component {
               height: 193,
               backgroundImage: `url(${book.imageLinks.smallThumbnail})`
             }} ></div>
-          <div className="book-shelf-changer"></div>
+          <BookShelfChanger />
         </div>
         <div className="book-title">{book.title}</div>
         <div className="book-authors">{book.authors && book.authors.join(', ')}</div>
