@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import BookShelf from "./Bookshelf";
+import {Link} from 'react-router-dom';
 
 //import {Route} from 'react-router-dom';
 
@@ -30,9 +31,10 @@ class ListBooks extends Component {
              }
             
             <div className="open-search">
-              <button>Add a book</button>
+              <Link to='/search'> 
+                <button>Add a book</button>
+              </Link>
             </div>
-        
         </div>
       </div>
     );

@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import ListBooks from './ListBooks';
+import SearchBooks from './SearchBooks'
 import * as BooksAPI from './BooksAPI';
-//import {Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
+
 import './App.css';
 
 
@@ -32,9 +34,17 @@ class App extends Component{
       return(
          
          <div className="app">
-            <ListBooks 
-            bookshelves={this.bookshelves}
-            myBookList={myBookList}/>
+            <Route exact path = '/'
+               render = { () => ( 
+                  <ListBooks 
+                  bookshelves={this.bookshelves}
+                  myBookList={myBookList}/>
+             )} />
+
+              
+            <Route path = "/search" 
+               render = { () => (<SearchBooks />)} />
+           
          </div>
       );
    }
