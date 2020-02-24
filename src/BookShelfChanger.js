@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import {Route} from 'react-router-dom';
 import './App.css';
 
 class BookShelfChanger extends Component {
@@ -10,7 +9,6 @@ class BookShelfChanger extends Component {
     this.setState({ value: e.target.value });
     this.props.moveBook(this.props.book, e.target.value);
   };
-
   render() {
     return (
       <div className='book-shelf-changer'>
@@ -27,5 +25,4 @@ class BookShelfChanger extends Component {
     );
   }
 }
-
 export default BookShelfChanger;

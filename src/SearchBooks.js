@@ -2,6 +2,7 @@ import * as BooksAPI from './BooksAPI';
 import Book from './Book';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './App.css';
 
 class SearchBooks extends Component {
@@ -23,9 +24,13 @@ class SearchBooks extends Component {
     });
   }
 
+  static propTypes = {
+    moveBook: PropTypes.func.isRequired
+  };
+
   render() {
-    const { mySearchList, moveBook } = this.state;
-    console.log(mySearchList);
+    const { mySearchList } = this.state;
+    const { moveBook } = this.props;
 
     return (
       <div className='search-books'>
@@ -55,5 +60,4 @@ class SearchBooks extends Component {
     );
   }
 }
-
 export default SearchBooks;

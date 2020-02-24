@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './App.css';
 import BookShelf from './Bookshelf';
 import { Link } from 'react-router-dom';
 
-//import {Route} from 'react-router-dom';
-
 class ListBooks extends Component {
+  static propTypes = {
+    bookshelves: PropTypes.array.isRequired,
+    myBookList: PropTypes.array.isRequired,
+    moveBook: PropTypes.func.isRequired
+  };
   render() {
     const { bookshelves, myBookList, moveBook } = this.props;
-
     return (
       <div className='list-books'>
         <div className='list-books-title'>
@@ -28,7 +31,6 @@ class ListBooks extends Component {
               />
             );
           })}
-
           <div className='open-search'>
             <Link to='/search'>
               <button>Add a book</button>
