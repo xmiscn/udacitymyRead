@@ -24,7 +24,7 @@ class SearchBooks extends Component {
   }
 
   render() {
-    const { mySearchList } = this.state;
+    const { mySearchList, moveBook } = this.state;
     console.log(mySearchList);
 
     return (
@@ -46,7 +46,9 @@ class SearchBooks extends Component {
         <div className='search-book-results'>
           <ol className='books-grid'>
             {mySearchList &&
-              mySearchList.map(book => <Book key={book.key} book={book} />)}
+              mySearchList.map(book => (
+                <Book key={book.key} book={book} moveBook={moveBook} />
+              ))}
           </ol>
         </div>
       </div>
