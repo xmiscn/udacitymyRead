@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import BookShelfChanger from './BookShelfChanger';
 import './App.css';
 
-const Book = ({ book, moveBook, shelf }) => {
+const Book = ({ book, moveBook }) => {
   return (
     <div className='book'>
       <div className='book-top'>

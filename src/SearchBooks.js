@@ -23,15 +23,33 @@ class SearchBooks extends Component {
       this.setState(() => ({ mySearchList }));
     });
   }
-  findBookShelf(id) {
-    this.props.myBookList.map(book => {
-      let result = this.props.myBookList.filter(book => id === book.id);
-      console.log(result);
+  /* setDefaultShelves = (this.mySearchList, myBookList) => {
+    return mySearchList.map(book => {
+      book.shelf='none';
+      myBookList.forEach(myBook => {      
+        if (myBook.id === book.id)
+        {
+           book.shelf = myBook.shelf;
+        }
+      });
+      return book;
     });
-    console.log('Filter: ', this.result);
-    return 'none';
-  }
-
+  };
+ */
+  setDefaultShelves = (mySearchList, myBookList) => {
+    return (
+      mySearchList &&
+      mySearchList.map(book => {
+        book.shelf = 'none';
+        myBookList.forEach(myBook => {
+          if (myBook.id === book.id) {
+            book.shelf = myBook.shelf;
+          }
+        });
+        return book;
+      })
+    );
+  };
   static propTypes = {
     moveBook: PropTypes.func.isRequired
   };
@@ -39,7 +57,9 @@ class SearchBooks extends Component {
   render() {
     const { mySearchList } = this.state;
     const { moveBook, myBookList } = this.props;
-    console.log('Inside Search: ', myBookList);
+
+    this.setDefaultShelves(mySearchList, myBookList);
+
     return (
       <div className='search-books'>
         <div className='search-books-bar'>
@@ -61,12 +81,7 @@ class SearchBooks extends Component {
             {mySearchList &&
               mySearchList.length > 0 &&
               mySearchList.map(book => (
-                <Book
-                  key={book.id}
-                  book={book}
-                  moveBook={moveBook}
-                  shelf={this.findBookShelf(book.id)}
-                />
+                <Book key={book.id} book={book} moveBook={moveBook} />
               ))}
           </ol>
         </div>

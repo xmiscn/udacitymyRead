@@ -3,7 +3,7 @@ import './App.css';
 
 class BookShelfChanger extends Component {
   state = {
-    value: 'none'
+    value: this.props.book.shelf
   };
 
   handleChange = e => {
@@ -11,8 +11,6 @@ class BookShelfChanger extends Component {
     this.props.moveBook(this.props.book, e.target.value);
   };
   render() {
-    const { shelf, book } = this.props;
-
     return (
       <div className='book-shelf-changer'>
         <select value={this.state.value} onChange={this.handleChange}>
@@ -23,7 +21,6 @@ class BookShelfChanger extends Component {
           <option value='wantToRead'>Want to Read</option>
           <option value='read'>Read</option>
           <option value='none'>None</option>
-          <default value={{ value: this.state.value }}></default>
         </select>
       </div>
     );

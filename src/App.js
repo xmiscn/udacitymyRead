@@ -34,7 +34,7 @@ class App extends Component {
 
   render() {
     const { myBookList } = this.state;
-    console.log('Inside App: ', myBookList);
+
     return (
       <div className='app'>
         <Route
