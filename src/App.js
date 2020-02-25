@@ -34,6 +34,7 @@ class App extends Component {
 
   render() {
     const { myBookList } = this.state;
+    console.log('Inside App: ', myBookList);
     return (
       <div className='app'>
         <Route
@@ -49,7 +50,9 @@ class App extends Component {
         />
         <Route
           path='/search'
-          render={() => <SearchBooks moveBook={this.moveBook} />}
+          render={() => (
+            <SearchBooks moveBook={this.moveBook} myBookList={myBookList} />
+          )}
         />
       </div>
     );

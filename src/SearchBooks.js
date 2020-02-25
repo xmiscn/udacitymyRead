@@ -23,6 +23,14 @@ class SearchBooks extends Component {
       this.setState(() => ({ mySearchList }));
     });
   }
+  findBookShelf(id) {
+    this.props.myBookList.map(book => {
+      let result = this.props.myBookList.filter(book => id === book.id);
+      console.log(result);
+    });
+    console.log('Filter: ', this.result);
+    return 'none';
+  }
 
   static propTypes = {
     moveBook: PropTypes.func.isRequired
@@ -30,8 +38,8 @@ class SearchBooks extends Component {
 
   render() {
     const { mySearchList } = this.state;
-    const { moveBook } = this.props;
-
+    const { moveBook, myBookList } = this.props;
+    console.log('Inside Search: ', myBookList);
     return (
       <div className='search-books'>
         <div className='search-books-bar'>
@@ -51,8 +59,14 @@ class SearchBooks extends Component {
         <div className='search-book-results'>
           <ol className='books-grid'>
             {mySearchList &&
+              mySearchList.length > 0 &&
               mySearchList.map(book => (
-                <Book key={book.key} book={book} moveBook={moveBook} />
+                <Book
+                  key={book.id}
+                  book={book}
+                  moveBook={moveBook}
+                  shelf={this.findBookShelf(book.id)}
+                />
               ))}
           </ol>
         </div>

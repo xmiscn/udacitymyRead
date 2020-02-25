@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import BookShelfChanger from './BookShelfChanger';
 import './App.css';
 
-const Book = ({ book, moveBook }) => {
+const Book = ({ book, moveBook, shelf }) => {
   return (
     <div className='book'>
       <div className='book-top'>
@@ -12,10 +12,11 @@ const Book = ({ book, moveBook }) => {
           style={{
             width: 128,
             height: 193,
-            backgroundImage: `url(${book.imageLinks.smallThumbnail})`
+            backgroundImage: `url(${book.imageLinks &&
+              book.imageLinks.smallThumbnail})`
           }}
         ></div>
-        <BookShelfChanger shelf={book.shelf} book={book} moveBook={moveBook} />
+        <BookShelfChanger book={book} moveBook={moveBook} />
       </div>
       <div className='book-title'>{book.title}</div>
       <div className='book-authors'>
@@ -24,6 +25,7 @@ const Book = ({ book, moveBook }) => {
     </div>
   );
 };
+
 Book.propTypes = {
   book: PropTypes.object.isRequired,
   moveBook: PropTypes.func.isRequired
