@@ -1,4 +1,5 @@
 import * as BooksAPI from './BooksAPI';
+import { debounce } from 'throttle-debounce';
 import Book from './Book';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
@@ -15,27 +16,30 @@ class SearchBooks extends Component {
     this.setState(() => ({
       query: query.trim()
     }));
-    this.searchBooks();
+    if (query.length > 0) {
+      this.searchBooks();
+    } else {
+      this.setState(() => ({ mySearchList: [] }));
+    }
   };
 
   searchBooks() {
-    BooksAPI.search(this.state.query).then(mySearchList => {
-      this.setState(() => ({ mySearchList }));
-    });
-  }
-  /* setDefaultShelves = (this.mySearchList, myBookList) => {
-    return mySearchList.map(book => {
-      book.shelf='none';
-      myBookList.forEach(myBook => {      
-        if (myBook.id === book.id)
-        {
-           book.shelf = myBook.shelf;
+    BooksAPI.search(this.state.query)
+      .then(mySearchList => {
+        if (!mySearchList || mySearchList.error) {
+          this.setState({ mySearchList: [] });
+          return mySearchList;
+        } else if (Array.isArray(mySearchList)) {
+          mySearchList = this.setDefaultShelves(
+            mySearchList,
+            this.props.myBookList
+          );
+          this.setState(() => ({ mySearchList }));
         }
-      });
-      return book;
-    });
-  };
- */
+      })
+      .catch(e => console.log(e));
+  }
+
   setDefaultShelves = (mySearchList, myBookList) => {
     return (
       mySearchList &&
@@ -50,15 +54,14 @@ class SearchBooks extends Component {
       })
     );
   };
+
   static propTypes = {
     moveBook: PropTypes.func.isRequired
   };
 
   render() {
     const { mySearchList } = this.state;
-    const { moveBook, myBookList } = this.props;
-
-    this.setDefaultShelves(mySearchList, myBookList);
+    const { moveBook } = this.props;
 
     return (
       <div className='search-books'>
@@ -73,6 +76,7 @@ class SearchBooks extends Component {
               placeholder='Search for Books'
               value={this.state.query}
               onChange={event => this.updateQuery(event.target.value)}
+              autoFocus
             />
           </div>
         </div>
