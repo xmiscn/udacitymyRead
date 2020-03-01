@@ -1,5 +1,4 @@
 import * as BooksAPI from './BooksAPI';
-import { debounce } from 'throttle-debounce';
 import Book from './Book';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
@@ -13,31 +12,28 @@ class SearchBooks extends Component {
   };
 
   updateQuery = query => {
-    this.setState(() => ({
-      query
-    }));
     if (query.length > 0) {
-      this.searchBooks();
+      this.setState({ query });
+      this.searchBooks(query);
     } else {
-      this.setState(() => ({ mySearchList: [] }));
+      this.setState(() => ({ mySearchList: [], query: '' }));
     }
   };
 
-  searchBooks() {
-    BooksAPI.search(this.state.query)
-      .then(mySearchList => {
-        if (!mySearchList || mySearchList.error) {
-          this.setState({ mySearchList: [] });
-          return mySearchList;
-        } else if (Array.isArray(mySearchList)) {
-          mySearchList = this.setDefaultShelves(
-            mySearchList,
-            this.props.myBookList
-          );
-          this.setState(() => ({ mySearchList }));
-        }
-      })
-      .catch(e => console.log(e));
+  // Reworked using await / async
+
+  async searchBooks(query) {
+    var mySearchList = await BooksAPI.search(query);
+    if (!mySearchList || mySearchList.error) {
+      this.setState({ mySearchList: [] });
+      return mySearchList;
+    } else {
+      mySearchList = this.setDefaultShelves(
+        mySearchList,
+        this.props.myBookList
+      );
+      this.setState(() => ({ mySearchList }));
+    }
   }
 
   setDefaultShelves = (mySearchList, myBookList) => {
