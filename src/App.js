@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { Switch } from 'react-router-dom';
 import ListBooks from './ListBooks';
 import SearchBooks from './SearchBooks';
+import PageNotFound from './PageNotFound';
 import * as BooksAPI from './BooksAPI';
+
 import { Route } from 'react-router-dom';
 
 import './App.css';
@@ -17,8 +20,8 @@ class App extends Component {
     { key: 'read', name: 'Already Read' }
   ];
 
-  componentDidMount() {
-    BooksAPI.getAll().then(myBookList => {
+  async componentDidMount() {
+    await BooksAPI.getAll().then(myBookList => {
       this.setState(() => ({ myBookList }));
     });
   }
@@ -37,23 +40,26 @@ class App extends Component {
 
     return (
       <div className='app'>
-        <Route
-          exact
-          path='/'
-          render={() => (
-            <ListBooks
-              bookshelves={this.bookshelves}
-              myBookList={myBookList}
-              moveBook={this.moveBook}
-            />
-          )}
-        />
-        <Route
-          path='/search'
-          render={() => (
-            <SearchBooks moveBook={this.moveBook} myBookList={myBookList} />
-          )}
-        />
+        <Switch>
+          <Route
+            exact
+            path='/'
+            render={() => (
+              <ListBooks
+                bookshelves={this.bookshelves}
+                myBookList={myBookList}
+                moveBook={this.moveBook}
+              />
+            )}
+          />
+          <Route
+            path='/search'
+            render={() => (
+              <SearchBooks moveBook={this.moveBook} myBookList={myBookList} />
+            )}
+          />
+          <Route component={PageNotFound} />
+        </Switch>
       </div>
     );
   }

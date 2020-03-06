@@ -23,7 +23,7 @@ class SearchBooks extends Component {
   // Reworked using await / async
 
   async searchBooks(query) {
-    var mySearchList = await BooksAPI.search(query);
+    let mySearchList = await BooksAPI.search(query);
     if (!mySearchList || mySearchList.error) {
       this.setState({ mySearchList: [] });
       return mySearchList;
